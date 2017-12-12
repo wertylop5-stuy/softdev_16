@@ -16,7 +16,7 @@ var resetHead = function(e){
     h.innerHTML = "Hello World!";
 };
 
-var onClick = function(e) {
+var onWheel = function(e) {
     var item = document.createElement("li");
     if(this.id == "b"){
 	if(e.deltaY > 0){
@@ -51,6 +51,27 @@ var onClick = function(e) {
 	
 };
 
+var onClick = function(e) {
+	var item = document.createElement("li");
+	
+	if(this.id == "b"){
+		item.innerHTML = "item " + thelist.children.length;
+		item.addEventListener("mouseover", changeHead);
+		item.addEventListener("click",removeol);
+		thelist.appendChild(item);
+	}
+	
+	else if(this.id == "b2"){
+		item.innerHTML = fibonacci(thenewlist.children.length);
+	    thenewlist.appendChild(item);
+	}
+	
+	else{
+		item.innerHTML = triangle(thenewerlist.children.length);
+		thenewerlist.appendChild(item);
+    }
+};
+
 var triangle = function(n){
     return (n*(n+1))/2;
 };
@@ -69,9 +90,14 @@ var fibonacci = function(n){
 var removeol = function(e){
     this.remove();
 }
-b.addEventListener("wheel", onClick );
-b2.addEventListener("wheel", onClick );
-b3.addEventListener("wheel", onClick );
+b.addEventListener("click", onClick );
+b.addEventListener("wheel", onWheel );
+
+b2.addEventListener("wheel", onWheel );
+b2.addEventListener("click", onClick );
+
+b3.addEventListener("wheel", onWheel );
+b3.addEventListener("click", onClick );
 
 //for...in is for object in general, for...of is for arrays
 thelist.addEventListener("mouseout", resetHead);
